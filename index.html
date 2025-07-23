@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Surprise!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffc0cb; /* PINK background */
+      font-family: 'Patrick Hand', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px #ff69b4;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 1.3em;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background-color: #e91e63;
+    }
+
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ffffff;
+      font-size: 2em;
+      animation: float 4s infinite ease-in;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="text">Hey you! Press this button!</h1>
+  <button id="mainButton">Umm Okay?</button>
+
+  <div class="hearts" id="heartsContainer"></div>
+
+  <script>
+    const text = document.getElementById("text");
+    const button = document.getElementById("mainButton");
+    const heartsContainer = document.getElementById("heartsContainer");
+
+    let stage = 0;
+
+    button.addEventListener("click", () => {
+      stage++;
+
+      if (stage === 1) {
+        text.textContent = "GET PRANKED YOU NOOB 😝";
+        button.textContent = "Noooo :(";
+      } else if (stage === 2) {
+        text.textContent = "🎂 Happiest Birthday Baby!! 🎂";
+        button.textContent = "Aww 💖";
+        createHearts();
+      } else {
+        text.textContent = "Wow 20 years old ka na, ang tanda mo na😁. Kidding aside, even if may pasok, I hope you have a happy and wonderful day. I'm hoping na in the future that we can celebrate your birthday together. Kaya wait ka lang ha! I love you so muchiee!🥰🥰 ";
+        button.style.display = "none";
+      }
+    });
+
+    function createHearts() {
+      for (let i = 0; i < 40; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
